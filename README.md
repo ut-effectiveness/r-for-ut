@@ -1,4 +1,4 @@
-R for Utah Tech users
+R for UT users <img src="images/README-ut_ie_logo.png" align="right" width="120" />
 ================
  
 ### Summer 2023
