@@ -12,8 +12,8 @@ Office of Institutional Effectiveness
 -----
 
 :spiral_calendar: Thursdays  
-:alarm_clock:     3:00 - 4:00  
-:room:           SET 524 
+:alarm_clock:     3:00 - 4:50  
+:school:           SET 524 
 
 -----
 
