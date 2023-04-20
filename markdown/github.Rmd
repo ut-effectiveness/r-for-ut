@@ -1,0 +1,27 @@
+---
+title: "Setting up git and GitHub"
+output: html_document
+---
+
+## Git and Github Resources
+
+- <a href = 'https://peerj.com/preprints/3159/'>Excuse me, do you have a moment to talk about version control?</a> by Jenny Bryan
+- <a href = 'http://happygitwithr.com/'>Happy Git with R</a> by Jenny Bryan
+- <a href = 'https://rstats.wtf/'>What They Forgot to Teach You About R</b> by ... you guessed it Jenny Bryan
+- <a href = 'https://rawgit.com/nazrug/Quickstart/master/GithubQuickstart.html'>Github Quickstart</a> by Melanie Frazier
+
+## Install Git
+
+We will follow <a href = 'https://happygitwithr.com/install-git.html'>these</a> excellent direction from **Happy Git with R**.
+
+
+## Configure Git and GitHub
+
+We will follow <a href = 'https://rstudio-conf-2020.github.io/r-for-excel/rstudio.html#github-brief-intro-config'>these</a> excellent directions from **R for Excel**.
+
+```{r}
+## use_git_config function with my username and email as arguments
+use_git_config(user.name = "jules32", user.email = "jules32@example.org")
+```
+
+Next we are 
