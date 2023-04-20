@@ -55,17 +55,17 @@ All course material are available in this repo.
 
 ## Schedule
 
-|Day       | Topic |
-|:----------|----------:|
-| April 6   |  Install help |
-| April 13  |  Overview of basic `tidyverse` verbs; Intro to markdown |
-| April 20  | Intro to Git and Github; pulling data from the database |
-| April 27  | Intro to GitHub| Filters & joins |
-| May 4     | Pivot Tables & `dplyr` |
-| May 11    |  |
-| May 18    |  | 
-| May 25    |  |
-| June 1    |  | 
-| June 8    |  | 
+|   Week  | Day       | Topic |
+|:--------|:----------|:----------|
+| Week 1  | April 6   | Install help |
+| Week 2  | April 13  | Overview of basic `tidyverse` verbs; Intro to markdown |
+| Week 3  | April 20  | Intro to Git and Github; pulling data from the database |
+| Week 4  | April 27  | Intro to GitHub| Filters & joins |
+| Week 5  | May 4     | Pivot Tables & `dplyr` |
+| Week 6  | May 11    |  |
+| Week 7  | May 18    |  | 
+| Week 8  | May 25    |  |
+| Week 9  | June 1    |  | 
+| Week 10 | June 8    |  | 
 
 
