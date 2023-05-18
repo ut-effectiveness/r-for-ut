@@ -1,0 +1,26 @@
+---
+title: "Playing around with Functions"
+author: "Craig Demke"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Here we will bring in a fake data frame
+```{r}
+source(here::here("R", "fake_student_df.R"))
+```
+
+Let's look at the data frame with the function View
+```{r}
+View(fake_student_df)
+```
+
+```{r}
+fake_student_df_clean <- fake_student_df
+  
+```
+
