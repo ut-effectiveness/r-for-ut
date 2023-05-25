@@ -22,14 +22,8 @@ term_to_term_retention_data_from_sql <- utHelpR::get_data_from_sql_file("enrolle
 We are going to calculate retention segmented by college and gpa band at census 
 
 ```{r}
-college_and_gpa_band <- term_to_term_retention_data_from_sql
+college_and_gpa_band_retention <- term_to_term_retention_data_from_sql
 
-age_at_census_pivot <- age_at_census_columns %>% 
-  mutate(is_returned_fall_3 = if_else(is_returned_fall_3, 'returned', 'nope')) %>% 
-  pivot_wider(names_from = is_returned_fall_3, values_from = headcount) %>% 
-  mutate(total = returned + nope) %>% 
-  mutate(return_rate_num = round(100*(returned/total), digits = 1)) %>% 
-  mutate(return_rate = percent(returned/total, accuracy = .1))
 ```
 
 Now we want to show a graph
