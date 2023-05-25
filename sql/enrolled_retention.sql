@@ -27,6 +27,7 @@
                AND c.institutional_cumulative_gpa < 3.0 THEN '2.5_to_3'
               WHEN c.institutional_cumulative_gpa >= 3.0
                AND c.institutional_cumulative_gpa <= 4.0 THEN '3_to_4'
+              WHEN c.institutional_cumulative_gpa is NULL THEN 'freshman'
          END AS gpa_band,
           COALESCE(f.is_exclusion, FALSE) AS is_exclusion,
           COALESCE(f.cohort_start_term_id, 'None') AS cohort_start_term_id,
