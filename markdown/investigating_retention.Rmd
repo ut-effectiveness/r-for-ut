@@ -22,52 +22,16 @@ term_to_term_retention_data_from_sql <- utHelpR::get_data_from_sql_file("enrolle
 We are going to calculate retention segmented by college and gpa band at census 
 
 ```{r}
-college_and_gpa_band_retention <- term_to_term_retention_data_from_sql
-
+college_and_gpa_band_retention <- term_to_term_retention_data_from_sql %>% 
+  filter(is_enrolled_census == TRUE) %>% 
+  filter(term_id == '202240') %>% 
+  select(term_id, college_abbrv, gpa_band, is_returned_next_spring) %>% 
+  group_by(term_id, college_abbrv, gpa_band, is_returned_next_spring) %>% 
+  summarize(headcount = n()) %>% 
+  ungroup() %>% 
+  mutate(is_returned_next_spring = if_else(is_returned_next_spring, 'returned', 'not_returned')) %>% 
+  pivot_wider(values_from = headcount, names_from = is_returned_next_spring) %>% 
+  mutate(total = returned + not_returned) %>% 
+  mutate(return_rate_num = 100*(returned/total)) %>% 
+  mutate(return_rate = percent(return_rate_num, scale = 1, accuracy = 1))
 ```
-
-Now we want to show a graph
-
-```{r}
-plot_df <- age_at_census_pivot %>% 
-  select(year, term_desc, age_at_census_band, return_rate_num, return_rate)
-
-ggplot(plot_df, 
-       aes(x = year, 
-           y = return_rate_num, 
-           color = age_at_census_band, 
-           group = age_at_census_band)) +
-  geom_line()
-```
-
-Now suppose we want to dress up the graph a bit.
-
-```{r}
-my_colors <- c("#8E877C", "#E7CA8C", "#F6BC8C", "#C87D55", "#868662", "#AD7C82", 
-               "#DC5A3F", "#668CB0")
-names(my_colors) <- plot_df$age_at_census_band %>% unique()
-
-ggplot(plot_df, aes(x = year, y = return_rate_num, color = age_at_census_band, group = age_at_census_band)) + 
-  geom_line() + 
-  #scale_x_continuous(breaks = pretty_breaks()) +
-  scale_y_continuous(labels = comma) +
-  guides(color = guide_legend(title = "Age at census")) +
-  labs(title = "Cohort Retention Rate",
-       subtitle = "Third fall retention rate as of census",
-       caption = "Data supplied by OIE",
-       x = 'Year',
-       y = 'Retention Rate') +
-  theme_minimal() +
-  theme(
-    panel.grid.major.x = element_blank(),
-    panel.grid.minor.x = element_blank(),
-    panel.grid.minor.y = element_blank(),
-    plot.subtitle = element_text(color = "#a6a6a6", size = 10),
-    plot.caption = element_text(color = '#a6a6a6', size = 8, face = 'italic')
-  ) +
-  scale_colour_manual(values = my_colors)
-```
-
-
-
-
