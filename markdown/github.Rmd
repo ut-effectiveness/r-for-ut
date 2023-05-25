@@ -24,4 +24,5 @@ We will follow <a href = 'https://rstudio-conf-2020.github.io/r-for-excel/rstudi
 use_git_config(user.name = "jules32", user.email = "jules32@example.org")
 ```
 
-Next we are set our PAT using <a href = "https://happygitwithr.com/https-pat.html">these</a> instructions.
+
+Welcome to GitHub!
