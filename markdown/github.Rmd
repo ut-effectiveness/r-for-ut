@@ -19,9 +19,10 @@ We will follow <a href = 'https://happygitwithr.com/install-git.html'>these</a> 
 
 We will follow <a href = 'https://rstudio-conf-2020.github.io/r-for-excel/rstudio.html#github-brief-intro-config'>these</a> excellent directions from **R for Excel**.
 
-```{r}
+```{r, eval = FALSE}
 ## use_git_config function with my username and email as arguments
 use_git_config(user.name = "jules32", user.email = "jules32@example.org")
 ```
+
 
 Welcome to GitHub!

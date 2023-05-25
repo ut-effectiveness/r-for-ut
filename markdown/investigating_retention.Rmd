@@ -13,31 +13,17 @@ library(scales)
 
 
 ```{r}
+test_sql <- utHelpR::get_data_from_sql_file("test.sql", dsn="edify", context="project")
 term_to_term_retention_data_from_sql <- utHelpR::get_data_from_sql_file("enrolled_retention.sql", dsn="edify", context="project")
-cohort_retention_data_from_sql <- utHelpR::get_data_from_sql_file("cohort_retention.sql", dsn="edify", context="project")
 ```
 
 ## Cohort Retention
 
-We are going to calculate retention segmented by age at census 
+We are going to calculate retention segmented by college and gpa band at census 
 
 ```{r}
-age_at_census_columns <- cohort_retention_data_from_sql %>% 
-  filter(season == 'Fall') %>%
-  filter(cohort_start_term_id != '202240') %>% 
-  filter(age_at_census_band != 'error') %>% 
-  mutate(year = str_sub(cohort_start_term_id, 1, 4)) %>% 
-  select(year, term_desc, age_at_census_band, is_returned_fall_3) %>% 
-  group_by(year, term_desc, age_at_census_band, is_returned_fall_3) %>% 
-  summarize(headcount = n()) %>% 
-  ungroup()
+college_and_gpa_band_retention <- term_to_term_retention_data_from_sql
 
-age_at_census_pivot <- age_at_census_columns %>% 
-  mutate(is_returned_fall_3 = if_else(is_returned_fall_3, 'returned', 'nope')) %>% 
-  pivot_wider(names_from = is_returned_fall_3, values_from = headcount) %>% 
-  mutate(total = returned + nope) %>% 
-  mutate(return_rate_num = round(100*(returned/total), digits = 1)) %>% 
-  mutate(return_rate = percent(returned/total, accuracy = .1))
 ```
 
 Now we want to show a graph
