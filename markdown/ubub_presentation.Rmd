@@ -1,0 +1,235 @@
+---
+title: "UBUG Presentation"
+author: "Craig Demke"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r load libraries, include=FALSE}
+library(gt)
+library(here)
+library(shiny)
+library(purrr)
+library(emo)
+library(DT)
+library(knitr)
+library(dplyr)
+```
+
+# Welcome 🎉   
+- Who am I
+ - masteR manipulatoR 
+- What is R
+ - Language
+ - Code
+ - Functions
+ - Packages
+ - usheUtils 
+
+# Language:  Syntax vs. Semantics
+```{r eval = TRUE, echo = TRUE}
+syntax <- "sentence rules and grammar"
+semantics <- "meaning"
+
+print(syntax)
+print(semantics)
+```
+
+class: center
+## Appreciation for Language
+learning another language helps you with your native language.
+```{r eval = TRUE, echo = TRUE}
+appreciate <- "sette pris på" 
+word_to_ask <- "appriciate"
+it_broken_down <- "to set a price on"
+
+paste("hvordan sier man", word_to_ask, "på norsk?", sep = " ")
+print(appreciate)
+print(it_broken_down)
+```
+R is like learning a new language as an adult after having already learned your native tongue.
+
+# Code: 
+Latin 'codex', which means "a book of laws"
+- R is an open source scripting language for predictive analytics and data visualization.
+- RStudio is an integrated development environment (IDE) for R and Python.
+- I want you to think about the first code you learned?  
+
+## Unfiltered: 
+"Hey rodent, help save the Galaxy"
+
+## Coded politely:
+**Pardon me** *Rocket*, **I'm sorry** to bother you I know you're busy, I was wondering if you could **please** help me save the Galaxy.
+
+## Making Two List in R
+```{r eval = TRUE, echo = TRUE}
+social_interactions <- c("I need something", 
+"I may need it again later",
+"youre in my way",
+"I may need something from you in the future",
+"pay attention to me",
+"undo",
+"possible incoming request",
+"important variable")
+```
+
+```{r eval = TRUE, echo = TRUE}
+polite_code <- c("Please", 
+"Thank you",
+"Pardon me",
+"You're welcome",
+"Excuse me",
+"I'm sorry",
+"May I help you",
+"person's name")
+```
+
+## Making a data frame
+```{r eval = TRUE, echo = TRUE}
+polite_df <- data.frame(social_interactions, polite_code) 
+knitr::kable(polite_df)
+```
+
+## Manipulating Data 
+So let's say I want to remember the two things I need when asking for something. 
+I could filter the dataframe for only those variables.
+```{r eval = TRUE, echo = TRUE}
+polite_code_for_favor <- polite_df %>% # think of this %>% symbol as an "and"
+  dplyr::filter(social_interactions == "I need something" 
+                | social_interactions == "important variable")
+
+knitr::kable(polite_code_for_favor)
+```
+
+### Arguments?
+In the Console
+```{r eval = FALSE, echo = TRUE}
+?dplyr::filter()
+```
+
+# Functions: 
+A function in R is an object containing multiple interrelated statements that are run together in a predefined order every time the function is called.
+
+## Function Example
+```{r eval = TRUE, echo = TRUE}
+ask_for_help <- function(persons_name, request) {
+paste("Pardon me", 
+      persons_name, 
+      "I was wondering if you could help me", 
+      request,
+      "Thanks.", 
+      sep = " ")
+}
+```
+
+### Now we use the function
+```{r eval = TRUE, echo = TRUE}
+ask_for_help("Star Lord", "Save the Galaxy.") 
+```
+
+### Making a list of the Guardians of the Galaxy
+```{r eval = TRUE, echo = TRUE}
+gog_names <- c("Star Lord", 
+"Gamorrah,",
+"Drax,",
+"Rocket,",
+"Groot,",
+"Nebula,",
+"Mantis,",
+"James Gunn's brother,")
+```
+
+### Making a list of offences
+```{r eval = TRUE, echo = TRUE}
+offences <- c("a trash panda.",
+              "a walking thesaurus.",
+              "this dumb tree.",
+              "the biggest idot in the Galaxy.",
+               "an imbecile.",
+               "ugly.",
+               "I am Groot.",
+               "a losser.")
+```
+
+## Making a new Data Frame
+```{r eval = TRUE, echo = TRUE}
+offended_df <- data.frame(
+  offender = sample(gog_names, 8, replace = FALSE),
+  offence = sample(offences, 8, replace = FALSE),
+  offended = sample(gog_names, 8, replace = TRUE)
+  )
+```
+
+```{r eval = TRUE, echo = TRUE}
+knitr::kable(offended_df)
+```
+
+## Apology Function 
+```{r eval = TRUE, echo = TRUE}
+apologize <- function(input_df) {
+  output_df <- input_df %>% 
+    dplyr::mutate(apology = paste("Hey", 
+           offended,
+           "this is",
+           offender,
+           "sorry I called you,",
+           '"',
+           offence,
+           '"',
+           sep = " ")) %>%
+     dplyr::select(apology)
+
+return(output_df)
+}
+```
+
+Here we can pass the apologize function
+and use the whole data frame as the only argument
+```{r eval = TRUE, echo = TRUE}
+random_apologies <- apologize(offended_df)
+```
+
+## Apology Function 
+```{r eval = TRUE, echo = TRUE}
+random_apologies <- apologize(offended_df)
+knitr::kable(random_apologies)
+```
+
+# Packages:
+R packages are a collection of R functions, complied code and sample data.
+
+## Package Example:
+- The apologize function could be part of an etiquette package
+- install.packages("etiquette")  
+ - etiquette::apologize()
+ - etiquette::ask_for_help() 
+ - etiquette::respond_to_request()
+ - etiquette::move_pass_someone()
+ - etiquette::repair_offense()
+ - etiquette::lower_your_volume()
+ - etiquette::reciprocity_for_future_request()
+ - etiquette::insert_humor_in_presentation()
+
+# the Package usheUtils:: 
+A R package created by Utah Tech which contains functions for most of the USHE
+reports. There are functions for each part of a report including meta-functions that
+run all the functions for the report as a whole. https://github.com/dsu-effectiveness/usheUtils
+
+You could simply install usheUtils from Utah Tech's Github repo from inside R studio 
+```{r eval = FALSE, echo = TRUE}
+install.packages("devtools")
+devtools::install_github("ut-effectiveness/usheUtils")
+```
+Then run your instution's data tables through the correct function 
+```{r eval = FALSE, echo = TRUE}
+usheUtils::generate_student_course_submission_file()
+usheUtils::generate_dws_submission_file()
+usheUtils::generate_financial_aid_submission_file()
+usheUtils::generate_course_submission_file()
+usheUtils::generate_graduation_submission_file()
+usheUtils::generate_program_submission_file()
+usheUtils::generate_space_inventory_building_submission_file()
+usheUtils::generate_space_inventory_rooms_submission_file()
+usheUtils::generate_student_submission_file()
+```
+---
