@@ -6,12 +6,12 @@ output: html_document
 ---
 
 ```{r load libraries, include=FALSE}
-library(gt)
+##library(gt)
 library(here)
-library(shiny)
-library(purrr)
-library(emo)
-library(DT)
+##library(shiny)
+##library(purrr)
+##library(emo)
+##library(DT)
 library(knitr)
 library(dplyr)
 ```
@@ -124,7 +124,10 @@ paste("Pardon me",
 
 ### Now we use the function
 ```{r eval = TRUE, echo = TRUE}
-ask_for_help("Star Lord", "Save the Galaxy.") 
+test <- ask_for_help("Craig", "with an R problem.")
+test2 <- ask_for_help("Randy", "with Argos")
+print(test)
+print(test2)
 ```
 
 ### Making a list of the Guardians of the Galaxy

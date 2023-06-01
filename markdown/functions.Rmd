@@ -20,7 +20,15 @@ View(fake_student_df)
 ```
 
 ```{r}
-fake_student_df_clean <- fake_student_df
+fake_student_df_clean <- fake_student_df %>% 
+  filter(gender_code == "F") %>% 
+  select(student_id, first_name, last_name, gender_code) %>% 
+  mutate(full_name = paste(first_name, last_name, sep = " ")) %>% 
+  mutate(gender_desc = case_when(
+    gender_code == "F" ~ "female",
+    gender_code == "M" ~ "male",
+    is.na(gender_code) ~ "unknown")) %>% 
+  select(student_id, full_name)
   
 ```
 

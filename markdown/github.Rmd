@@ -21,7 +21,7 @@ We will follow <a href = 'https://rstudio-conf-2020.github.io/r-for-excel/rstudi
 
 ```{r}
 ## use_git_config function with my username and email as arguments
-use_git_config(user.name = "jules32", user.email = "jules32@example.org")
+##use_git_config(user.name = "andreabr-dixie", user.email = "andrea.bringhurst@utahtech.edu")
 ```
 
-Welcome to GitHub!
+Welcome to GitHub!    
