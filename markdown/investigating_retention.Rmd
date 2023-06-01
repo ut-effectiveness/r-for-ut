@@ -26,7 +26,7 @@ college_and_gpa_band_retention <- term_to_term_retention_data_from_sql %>%
   filter(is_enrolled_census == TRUE) %>% 
   filter(term_id == '202240') %>% 
   select(term_id, college_abbrv, gpa_band, is_returned_next_spring) %>% 
-  group_by(term_id, college_abbrv, gpa_band, is_returned_next_spring) %>% 
+  group_by(term_id, college_abbrv, gpa_band, is_returned_next_spring) %>%
   summarize(headcount = n()) %>% 
   ungroup() %>% 
   mutate(is_returned_next_spring = if_else(is_returned_next_spring, 'returned', 'not_returned')) %>% 
